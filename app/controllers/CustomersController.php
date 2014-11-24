@@ -1,6 +1,6 @@
 <?php
 
-class HomeController extends BaseController {
+class CustomersController extends BaseController {
 
 	/*
 	|--------------------------------------------------------------------------
@@ -57,14 +57,14 @@ class HomeController extends BaseController {
 				'password' 	=> Input::get('password')
 			);
 			
-			Auth::user()->attempt(array(
+			Auth::customer()->attempt(array(
 		   		 'email'     => $userdata['email'],
 				 'password'  => $userdata['password'],
 				));
 			
 
 			// attempt to do the login
-			if (Auth::user()->check()) {
+			if (Auth::customer()->check()) {
 
 				echo 'SUCCESS!';
 				
@@ -72,7 +72,7 @@ class HomeController extends BaseController {
 			} else {	 	
 
 				// validation not successful, send back to form	
-				return Redirect::to('admin.login');
+				return Redirect::to('login');
 
 			}
 

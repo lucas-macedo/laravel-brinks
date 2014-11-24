@@ -12,12 +12,13 @@
 */
 
 Route::get('/', function(){
-	return View::make('hello');
+    return View::make('hello');
 });
 
 Route::get('login', function(){
-    return View::make('admin.login');
+    return View::make('login');
 });
+Route::post('login', array('uses' => 'CustomersController@doLogin'));
 
 Route::get('admin/logout', function(){
     return Auth::logout();
@@ -28,8 +29,12 @@ Route::post('admin/login', array('uses' => 'HomeController@doLogin'));
 
 Route::group(array('before' => 'auth'), function(){
 		// main page for the admin section (app/views/admin/dashboard.blade.php)
-		Route::get('/admin', function(){
-			
+        Route::get('/admin', function(){
+
+            return View::make('admin.dashboard');
+        });
+
+        Route::get('/admin/login', function(){
 			return View::make('admin.dashboard');
 			
 		});
@@ -38,7 +43,7 @@ Route::group(array('before' => 'auth'), function(){
 
 Route::filter('auth', function()
 {
-    if (Auth::guest()) return Redirect::to('admin/login');
+    if (Auth::user()->guest()) return View::make('admin.login');
 });
 
 /*Route::post('admin/login', function(){
