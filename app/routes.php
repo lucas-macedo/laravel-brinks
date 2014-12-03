@@ -18,32 +18,38 @@ Route::get('/', function(){
 Route::get('login', function(){
     return View::make('login');
 });
+
 Route::post('login', array('uses' => 'CustomersController@doLogin'));
 
-Route::get('admin/logout', function(){
-    return Auth::logout();
-    return Redirect::to('admin/login');
+Route::group(array('before' => 'auth.customer'), function(){
+    Route::get('/login', function(){
+       
+        return View::make('admin.dashboard');
+    });
 });
 
-Route::post('admin/login', array('uses' => 'HomeController@doLogin'));
+Route::post('admin', array('uses' => 'HomeController@doLogin'));
 
-Route::group(array('before' => 'auth'), function(){
-		// main page for the admin section (app/views/admin/dashboard.blade.php)
+
+Route::group(array('before' => 'auth.admin'), function(){
+        // main page for the admin section (app/views/admin/dashboard.blade.php)
+
         Route::get('/admin', function(){
-
             return View::make('admin.dashboard');
         });
-
-        Route::get('/admin/login', function(){
-			return View::make('admin.dashboard');
-			
-		});
+        Route::get('admin/logout', function(){
+            Auth::logout();
+            return Redirect::to('admin');
+        });
 
 });
 
-Route::filter('auth', function()
-{
-    if (Auth::user()->guest()) return View::make('admin.login');
+Route::filter('auth.admin', function(){
+    if (!Auth::user()->check()) return View::make('admin.login');
+});
+
+Route::filter('auth.customer', function(){
+    if (!Auth::customer()->check()) return View::make('admin.login');
 });
 
 /*Route::post('admin/login', function(){

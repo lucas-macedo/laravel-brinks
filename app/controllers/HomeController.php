@@ -46,7 +46,7 @@ class HomeController extends BaseController {
 
 		// if the validator fails, redirect back to the form
 		if ($validator->fails()) {
-			return Redirect::to('login')
+			return Redirect::to('admin')
 				->withErrors($validator) // send back all errors to the login form
 				->withInput(Input::except('password')); // send back the input (not the password) so that we can repopulate the form
 		} else {
@@ -72,7 +72,7 @@ class HomeController extends BaseController {
 			} else {	 	
 
 				// validation not successful, send back to form	
-				return Redirect::to('admin.login');
+				return Redirect::to('admin');
 
 			}
 
