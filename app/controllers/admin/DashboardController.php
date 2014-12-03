@@ -1,15 +1,19 @@
 <?php
+namespace Admin;
+use BaseController;
 
-class DashboardController extends Controller {
+class DashboardController extends BaseController {
 
 	/**
 	 * Setup the layout used by the controller.
 	 *
 	 * @return void
 	 */
-	protected function index()
+
+
+	protected function getIndex()
 	{
-		return "Ola Admin";
+		return "ee";
 	}
 
 
