@@ -18,13 +18,12 @@ Route::group(['prefix' => 'admin', 'before'=>'auth'], function(){
 
     Route::get('/', array('uses' => 'Admin\DashboardController@getIndex'));
 
-    Route::controller('admin/dashboard', 'Admin\DashboardController');
+        Route::controller('dashboard', 'Admin\DashboardController');
 
-
-    Route::get('admin/logout', function(){
+        Route::get('logout', function(){
             Auth::logout();
-            return Redirect::to('admin');
-        });
+        return Redirect::to('admin');
+    });
 });
 
 Route::filter('auth.admin', function(){ if (!Auth::user()->check()) return View::make('admin.login');});

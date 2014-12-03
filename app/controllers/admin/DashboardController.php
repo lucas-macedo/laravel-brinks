@@ -11,10 +11,7 @@ class DashboardController extends BaseController {
 	 */
 
 
-	protected function getIndex()
-	{
-		return "ee";
-	}
-
+	public function getIndex() { return "ee"; }
+	public function getOla() { return "ola"; }
 
 }
