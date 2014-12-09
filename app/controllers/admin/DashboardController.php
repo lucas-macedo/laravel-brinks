@@ -1,5 +1,6 @@
 <?php
 namespace Admin;
+use Auth;
 use BaseController;
 
 class DashboardController extends BaseController {
@@ -11,7 +12,7 @@ class DashboardController extends BaseController {
 	 */
 
 
-	public function getIndex() { return "ee"; }
+	public function getIndex() { dd(Auth::user()->get()); }
 	public function getOla() { return "ola"; }
 
 }

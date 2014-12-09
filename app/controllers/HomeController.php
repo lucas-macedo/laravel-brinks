@@ -22,14 +22,15 @@ class HomeController extends BaseController {
 
 	public function showLogin()
 	{
-		// show the form
+		
 		return View::make('login');
 	}
-	
+
+
 	public function doLogout()
 	{
-		Auth::logout(); // log the user out of our application
-		return Redirect::to('login'); // redirect the user to the login screen
+		Auth::user()->logout();
+        return Redirect::to('/');
 	}
 
 
@@ -46,7 +47,7 @@ class HomeController extends BaseController {
 
 		// if the validator fails, redirect back to the form
 		if ($validator->fails()) {
-			return Redirect::to('admin')
+			return Redirect::to('/')
 				->withErrors($validator) // send back all errors to the login form
 				->withInput(Input::except('password')); // send back the input (not the password) so that we can repopulate the form
 		} else {
@@ -57,22 +58,21 @@ class HomeController extends BaseController {
 				'password' 	=> Input::get('password')
 			);
 			
-			Auth::user()->attempt(array(
+			Auth::customer()->attempt(array(
 		   		 'email'     => $userdata['email'],
 				 'password'  => $userdata['password'],
 				));
 			
 
 			// attempt to do the login
-			if (Auth::user()->check()) {
-
-				echo 'SUCCESS!';
+			if (Auth::customer()->check()) {
+				return Redirect::to('/');
 				
 
 			} else {	 	
 
 				// validation not successful, send back to form	
-				return Redirect::to('admin');
+				return Redirect::to('/');
 
 			}
 
