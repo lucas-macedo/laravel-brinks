@@ -11,10 +11,10 @@ class CustomerTableSeeder extends Seeder
 			'first_name'     => 'Lucas',
 			'last_name' => 'macedo',
 			'email'    => 'lucas@b3net.com.br',
-			'password' => Hash::make('834510'),
+			'password' => Hash::make('1234546'),
 			'status' => 1,
-			'cpf' => '077.788.459-38',
-			'rg' => '45465465465',
+			'cpf' => '047.748.459-38',
+			'rg' => '45465265465',
 			'phone' => '43 9990-87839',
 			'newsletter' => 1
 			));
