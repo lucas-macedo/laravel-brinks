@@ -1,6 +1,7 @@
 <?php
 
-Route::get('/', function(){ return View::make('hello');});
+Route::get('/', 'HomeController@showWelcome');
+Route::controller('product', 'ProductsController');
 
 Route::get('login', 'CustomersController@showLogin');
 Route::post('login', 'CustomersController@doLogin');
@@ -37,6 +38,13 @@ Route::group(['prefix' => 'admin', 'before'=>'auth.admin'], function(){
             //dd(Auth::user()->check());
             return Redirect::to('admin');
         });
+});
+
+
+Route::group(array('prefix' => 'api'), function() {
+
+    Route::resource('comments', 'CommentController', 
+        array('only' => array('index', 'store', 'destroy')));
 });
 
 Route::filter('auth.admin', function(){ if (!Auth::user()->check()) return View::make('admin.login');});

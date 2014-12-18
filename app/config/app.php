@@ -123,7 +123,8 @@ return array(
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 		'Barryvdh\Debugbar\ServiceProvider',
 		'Ollieread\Multiauth\MultiauthServiceProvider',
-		'Ollieread\Multiauth\Reminders\ReminderServiceProvider'
+		'Ollieread\Multiauth\Reminders\ReminderServiceProvider',
+		'Dollar\Generators\GeneratorsServiceProvider'
 
 	),
 
